@@ -72,7 +72,7 @@ function patternCompress(text) {
 function patternDecompress(text) {
   const bC = text.charAt(0);
   const patterns = text.substring(1, text.indexOf(bC + bC)).split(bC);
-  let content = text.substring(text.indexOf(bC + bC) + 2);
+  let content = text.substring(text.indexOf(bC + bC, 1) + 2);
   patterns.reverse().forEach(p => {
     content = content.replaceAll(p.charAt(0), p.substring(1));
   });
@@ -89,13 +89,20 @@ console.log(decompressed, "\n");
 */
 window.addEventListener("load", () => {
   const input = document.getElementById("input");
+  const inputLength = document.getElementById("inputLength");
   const output = document.getElementById("output");
+  const outputLength = document.getElementById("outputLength");
   const compress = document.getElementById("compress");
   const decompress = document.getElementById("decompress");
   compress.addEventListener("click", e => {
     output.value = patternCompress(input.value).text;
+    outputLength.textContent = "length: " + output.value.length;
   });
   decompress.addEventListener("click", e => {
     output.value = patternDecompress(input.value);
+    outputLength.textContent = "length: " + output.value.length;
+  });
+  input.addEventListener("change", e => {
+    inputLength.textContent = "length: " + input.value.length;
   });
 });

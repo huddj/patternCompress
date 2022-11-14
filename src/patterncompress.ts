@@ -54,7 +54,7 @@ function patternCompress(text: string): {text: string, patterns: {char: string, 
 function patternDecompress(text: string): string {
     const bC = text.charAt(0);
     const patterns = text.substring(1, text.indexOf(bC + bC)).split(bC);
-    let content = text.substring(text.indexOf(bC + bC) + 2);
+    let content = text.substring(text.indexOf(bC + bC, 1) + 2);
     patterns.reverse().forEach(p => {
         content = content.replaceAll(p.charAt(0), p.substring(1));
     })
@@ -71,13 +71,20 @@ console.log(decompressed, "\n");
 */
 window.addEventListener("load", () => {
     const input = document.getElementById("input") as HTMLTextAreaElement
+    const inputLength = document.getElementById("inputLength") as HTMLSpanElement;
     const output = document.getElementById("output") as HTMLTextAreaElement
+    const outputLength = document.getElementById("outputLength") as HTMLSpanElement;
     const compress = document.getElementById("compress") as HTMLButtonElement;
     const decompress = document.getElementById("decompress") as HTMLButtonElement;
     compress.addEventListener("click", e => {
         output.value = patternCompress(input.value).text;
+        outputLength.textContent = "length: " + output.value.length;
     });
     decompress.addEventListener("click", e => {
         output.value = patternDecompress(input.value);
-    })
+        outputLength.textContent = "length: " + output.value.length;
+    });
+    input.addEventListener("change", e => {
+        inputLength.textContent = "length: " + input.value.length;
+    });
 })
