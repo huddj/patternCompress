@@ -1,11 +1,12 @@
 {
-  "name": "Qtime",
+  "name": "packageCompress",
   "version": "0.1",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "babel src --out-dir dist --extensions \".ts\"",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "publish": "babel src --out-dir production --extensions \".ts\""
   },
   "repository": {
     "type": "git",
