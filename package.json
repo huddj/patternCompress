@@ -1,0 +1,22 @@
+{
+  "name": "Qtime",
+  "version": "0.1",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "babel src --out-dir dist --extensions \".ts\"",
+    "typecheck": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huddj/Qtime.git"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/node": "^18.7.16",
+    "typescript": "^4.8.3"
+  }
+}
