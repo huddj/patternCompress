@@ -61,6 +61,7 @@ function patternDecompress(text: string): string {
     })
     return content;
 }
+/*
 const compressed = patternCompress(input)
 const decompressed = patternDecompress(compressed.text);
 console.log(input, "\nlength:", input.length, "\n");
@@ -68,3 +69,16 @@ console.log(compressed.patterns);
 console.log(compressed.text);
 console.log("length:", compressed.text.length, "\n")
 console.log(decompressed, "\n");
+*/
+window.addEventListener("load", () => {
+    const input = document.getElementById("input") as HTMLTextAreaElement
+    const output = document.getElementById("output") as HTMLTextAreaElement
+    const compress = document.getElementById("compress") as HTMLButtonElement;
+    const decompress = document.getElementById("decompress") as HTMLButtonElement;
+    compress.addEventListener("click", e => {
+        output.value = patternCompress(input.value).text;
+    });
+    decompress.addEventListener("click", e => {
+        output.value = patternDecompress(input.value);
+    })
+})
