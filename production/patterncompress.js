@@ -7,6 +7,7 @@ function getPatternValue(text, pattern) {
   }
   let occurences = 0;
   while (0 <= place) {
+    console.log(place, pattern);
     place = text.indexOf(pattern, place + pattern.length);
     occurences++;
   }
@@ -30,7 +31,9 @@ function findBestPattern(text) {
   while (improvement) {
     length++;
     improvement = false;
+    console.log(patterns);
     patterns.forEach((p, i) => {
+      console.log(p);
       const pattern = text.substring(p.location, p.location + length);
       const value = getPatternValue(text, pattern);
       if (p.value < value) {
@@ -61,6 +64,7 @@ function patternCompress(text) {
     };
     patterns.push(pattern);
     text = text.replaceAll(pattern.pattern, pattern.char);
+    console.log(patterns);
   }
   const bC = unusedASCII.shift();
   const result = bC + patterns.map(p => p.char + p.pattern).join(bC) + bC + bC + text;
