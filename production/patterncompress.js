@@ -1,4 +1,4 @@
-const partialASCII = [...Array(94).keys()].map(i => String.fromCharCode(i + 33));
+const partialASCII = [...[...Array(94).keys()].map(i => String.fromCharCode(i + 33)), ...[...Array(11).keys()].map(i => String.fromCharCode(i + 161)), ...[...Array(80).keys()].map(i => String.fromCharCode(i + 174))];
 function getPatternValue(text, pattern) {
   let place = text.indexOf(pattern);
   if (-1 === place) {
