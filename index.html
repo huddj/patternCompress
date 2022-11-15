@@ -8,16 +8,23 @@
     <style>
     textarea {
         width: 70vw;
-        height: 30vw;
+        height: 30vh;
     }
     </style>
 </head>
 
 <body>
     <h1>Pattern Compress</h1>
+    <p>
+To compress, enter ASCII text into the upper box and click the compress button; it might take a second depending on length.<br>
+To decompress, enter compressed text into the upper box and click the decompress button.<br>
+The effectiveness of compression depends on the length and repetitiveness of the input.
+    </p>
+    <h3>Operations</h3>
+    <button id="compress">Compress</button><button id="decompress">Decompress</button> <br>
+    <h3>Input</h3>
     <textarea id="input"></textarea> <span id="inputLength"></span> <br>
-    <button id="compress">Compress</button>
-    <button id="decompress">Decompress</button> <br>
+    <h3>Output</h3>
     <textarea id="output" readonly></textarea> <span id="outputLength"></span>
 </body>
 
