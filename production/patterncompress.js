@@ -20,10 +20,20 @@ function getPatternValue(text, pattern) {
 function findBestPattern(text) {
   let length = 2;
   const patterns = [];
+  const patternCache = new Map();
+  const getPatternValueCached = pattern => {
+    if (patternCache.has(pattern)) {
+      return patternCache.get(pattern);
+    } else {
+      const value = getPatternValue(text, pattern);
+      patternCache.set(pattern, value);
+      return value;
+    }
+  };
   let maxValue = 0;
   for (let i = 0; i < text.length - 1; i++) {
     const pattern = text.substring(i, i + length);
-    const pVal = getPatternValue(text, pattern);
+    const pVal = getPatternValueCached(pattern);
     if (1 < pVal.occurences) {
       patterns.push({
         pattern: pattern,
@@ -46,7 +56,7 @@ function findBestPattern(text) {
         continue;
       }
       const pattern = text.substring(p.location, p.location + length);
-      const pVal = getPatternValue(text, pattern);
+      const pVal = getPatternValueCached(pattern);
       maxValue = maxValue < pVal.value ? pVal.value : maxValue;
       if (p.value <= pVal.value && 1 < pVal.occurences) {
         patterns[i] = {
@@ -65,16 +75,7 @@ function findBestPattern(text) {
         }
       }
     }
-    /*console.log(
-        "length", length,
-        "maxvalue", maxValue,
-        "patterns.length", patterns.length,
-        "growing.length", patterns.filter(p => p.grow).length,
-        "growing.max", patterns.filter(p => p.grow).reduce((p, c) => p < c.value ? c.value : p, 0),
-        "patterns", patterns.slice(0, 5).map(p => "{pattern: '" + p.pattern + "', location: " + p.location + ", value: " + p.value + ", grow: " + p.grow + "}")
-    );*/
   }
-
   console.log(iterations);
   return patterns.reduce((p, c) => p.value < c.value ? c : p, {
     pattern: "default",
@@ -111,15 +112,6 @@ function patternDecompress(text) {
   });
   return content;
 }
-/*
-const compressed = patternCompress(input)
-const decompressed = patternDecompress(compressed.text);
-console.log(input, "\nlength:", input.length, "\n");
-console.log(compressed.patterns);
-console.log(compressed.text);
-console.log("length:", compressed.text.length, "\n")
-console.log(decompressed, "\n");
-*/
 window.addEventListener("load", () => {
   const input = document.getElementById("input");
   const inputLength = document.getElementById("inputLength");
@@ -129,13 +121,13 @@ window.addEventListener("load", () => {
   const decompress = document.getElementById("decompress");
   compress.addEventListener("click", e => {
     output.value = patternCompress(input.value).text;
-    outputLength.textContent = "length: " + output.value.length;
+    outputLength.textContent = "length: " + output.value.length + " characters";
   });
   decompress.addEventListener("click", e => {
     output.value = patternDecompress(input.value);
-    outputLength.textContent = "length: " + output.value.length;
+    outputLength.textContent = "length: " + output.value.length + " characters";
   });
   input.addEventListener("change", e => {
-    inputLength.textContent = "length: " + input.value.length;
+    inputLength.textContent = "length: " + input.value.length + " characters";
   });
 });
