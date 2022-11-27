@@ -120,14 +120,13 @@ window.addEventListener("load", () => {
   const compress = document.getElementById("compress");
   const decompress = document.getElementById("decompress");
   compress.addEventListener("click", e => {
+    inputLength.textContent = "length: " + input.value.length + " characters";
     output.value = patternCompress(input.value).text;
     outputLength.textContent = "length: " + output.value.length + " characters";
   });
   decompress.addEventListener("click", e => {
+    inputLength.textContent = "length: " + input.value.length + " characters";
     output.value = patternDecompress(input.value);
     outputLength.textContent = "length: " + output.value.length + " characters";
-  });
-  input.addEventListener("change", e => {
-    inputLength.textContent = "length: " + input.value.length + " characters";
   });
 });
