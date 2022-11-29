@@ -76,7 +76,6 @@ function findBestPattern(text) {
       }
     }
   }
-  console.log(iterations);
   return patterns.reduce((p, c) => p.value < c.value ? c : p, {
     pattern: "default",
     location: 0,

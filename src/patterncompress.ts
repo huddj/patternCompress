@@ -61,7 +61,6 @@ function findBestPattern(text: string): string {
             }
         }
     }
-    console.log(iterations);
     return patterns.reduce((p, c) => p.value < c.value ? c : p, {pattern: "default", location: 0, value: -1}).pattern;
 }
 function patternCompress(text: string): {text: string, patterns: {char: string, pattern: string, value: number}[]} {
